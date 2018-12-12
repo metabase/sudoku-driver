@@ -2,6 +2,10 @@
 
 ![screenshot](screenshots/sudoku-driver.png)
 
+All you need you do is drop the driver in your `plugins/` directory. You can grab it [here](https://github.com/metabase/sudoku-driver/releases/download/1.0.0/sudoku.metabase-driver.jar) or build it yourself:
+
+## Building the driver 
+
 ### Prereqs: Install Metabase locally, compiled for building drivers
 
 ```bash
