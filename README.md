@@ -6,10 +6,10 @@ All you need you do is drop the driver in your `plugins/` directory. You can gra
 
 ## Building the driver 
 
-### Prereqs: Install Metabase locally, compiled for building drivers
+### Prereq: Install Metabase locally, compiled for building drivers
 
 ```bash
-cd /path/to/metabase/source
+cd /path/to/metabase_source
 lein install-for-building-drivers
 ```
 
@@ -22,6 +22,7 @@ DEBUG=1 LEIN_SNAPSHOTS_IN_RELEASE=true lein uberjar
 
 ### Copy it to your plugins dir and restart Metabase
 ```bash
+mkdir -p /path/to/metabase/plugins/
 cp target/uberjar/sudoku.metabase-driver.jar /path/to/metabase/plugins/
 jar -jar /path/to/metabase/metabase.jar
 ```
@@ -29,7 +30,8 @@ jar -jar /path/to/metabase/metabase.jar
 *or:*
 
 ```bash
-cp target/uberjar/sudoku.metabase-driver.jar /path/to/metabase/source/plugins
-cd /path/to/metabase/source
+mkdir -p /path/to/metabase_source/plugins
+cp target/uberjar/sudoku.metabase-driver.jar /path/to/metabase_source/plugins/
+cd /path/to/metabase_source
 lein run
 ```
