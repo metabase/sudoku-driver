@@ -15,9 +15,10 @@ cd /path/to/metabase_source
 lein install-for-building-drivers
 ```
 
-### Build it
+### Build the Sudoku driver
 
 ```bash
+# (In the Sudoku driver directory)
 lein clean
 DEBUG=1 LEIN_SNAPSHOTS_IN_RELEASE=true lein uberjar
 ```
