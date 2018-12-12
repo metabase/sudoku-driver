@@ -1,0 +1,15 @@
+# Complete list of options here: https://github.com/metabase/metabase/wiki/Metabase-Plugin-Manifest-Reference
+info:
+  name: Metabase Sudoku Driver
+  version: 1.0.0
+  description: Generates SuDoKuS
+driver:
+  name: sudoku
+  lazy-load: true
+  # https://github.com/metabase/metabase/blob/master/src/metabase/driver/common.clj
+  connection-properties:
+    - name: your-name
+      display-name: Your name
+init:
+  - step: load-namespace
+    namespace: metabase.driver.sudoku
