@@ -1,5 +1,7 @@
 # Sample Metabase Driver: Sudoku
 
+![screenshot](screenshots/sudoku-driver.png)
+
 ### Prereqs: Install Metabase locally, compiled for building drivers
 
 ```bash
