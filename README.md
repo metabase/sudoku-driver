@@ -6,7 +6,9 @@ All you need you do is drop the driver in your `plugins/` directory. You can gra
 
 ## Building the driver 
 
-### Prereq: Install Metabase locally, compiled for building drivers
+### Prereq: Install Metabase as a local maven dependency, compiled for building drivers
+
+Clone the [Metabase repo](https://github.com/metabase/metabase) first if you haven't already done so.
 
 ```bash
 cd /path/to/metabase_source
