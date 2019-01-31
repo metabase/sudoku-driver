@@ -56,7 +56,7 @@
              (recur more remaining-holes board)))))))
 
 (defn rando-board-query-results [difficulty]
-  {:rows    (for [row (partition 9 (rando-board :easy))]
+  {:rows    (for [row (partition 9 (rando-board difficulty))]
               ;; replace the zeroes in the board with nils
               (for [cell row]
                 (when-not (zero? cell)
