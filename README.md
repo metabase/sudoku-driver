@@ -2,39 +2,56 @@
 
 ![screenshot](screenshots/sudoku-driver.png)
 
-All you need you do is drop the driver in your `plugins/` directory. You can grab it [here](https://github.com/metabase/sudoku-driver/releases/download/1.0.0/sudoku.metabase-driver.jar) or build it yourself:
+All you need you do is drop the driver in your `/path/to/metabase/plugins/` directory.
 
-## Building the driver 
+## Building the driver
 
-### Prereq: Install Metabase as a local maven dependency, compiled for building drivers
+## Prereq: Install the Clojure CLI
 
-Clone the [Metabase repo](https://github.com/metabase/metabase) first if you haven't already done so.
+Make sure you have the `clojure` CLI version `1.10.3.933` or newer installed; you can check this with `clojure
+--version`. Follow the instructions at https://clojure.org/guides/getting_started if you need to install a
+newer version.
 
-```bash
-cd /path/to/metabase_source
-lein install-for-building-drivers
+## Build it
+
+```sh
+clojure -X:dev:build
 ```
 
-### Build the Sudoku driver
+will create `target/sudoku.metabase-driver.jar`. Copy this file to `/path/to/metabase/plugins/` and restart your
+server, and the driver will show up.
 
-```bash
-# (In the Sudoku driver directory)
-lein clean
-DEBUG=1 LEIN_SNAPSHOTS_IN_RELEASE=true lein uberjar
+## Hacking on the driver locally
+
+It's easiest to create an alias in `~/.clojure/deps.edn` to include the source paths for your driver, e.g.
+
+```clojure
+;; ~/.clojure/deps.edn
+{:aliases
+ {:user/sudoku-driver
+  {:extra-deps {metabase/sudoku-driver {:local/root "/home/cam/sudoku-driver"}}
+   :jvm-opts   ["-Dmb.dev.additional.driver.manifest.paths=/home/cam/sudoku-driver/resources/metabase-plugin.yaml"]}}}
 ```
 
-### Copy it to your plugins dir and restart Metabase
-```bash
-mkdir -p /path/to/metabase/plugins/
-cp target/uberjar/sudoku.metabase-driver.jar /path/to/metabase/plugins/
-jar -jar /path/to/metabase/metabase.jar
+And then start a (n)REPL or run a dev server from the main Metabase project directory with something like:
+
+```sh
+# start a regular REPL
+clojure -M:user/sudoku-driver
+
+# start an nREPL
+clojure -M:user/sudoku-driver:nrepl
+
+# start a local dev server server
+clojure -M:user/sudoku-driver:run
 ```
 
-*or:*
+You can also pass these options directly to `clojure` e.g.
 
-```bash
-mkdir -p /path/to/metabase_source/plugins
-cp target/uberjar/sudoku.metabase-driver.jar /path/to/metabase_source/plugins/
-cd /path/to/metabase_source
-lein run
+```sh
+# start the dev server
+clojure \
+  -Sdeps '{:deps {metabase/sudoku-driver {:local/root "/home/cam/sudoku-driver"}}}' \
+  -J-Dmb.dev.additional.driver.manifest.paths=/home/cam/sudoku-driver/resources/metabase-plugin.yaml \
+  -M:run
 ```
