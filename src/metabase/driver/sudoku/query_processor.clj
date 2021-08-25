@@ -55,11 +55,17 @@
              ;; otherwise throw out the bad hole position and recurse
              (recur more remaining-holes board)))))))
 
+(defn column-metadata []
+  (mapv
+   (fn [i]
+     {:name           (format "col_%d" i)
+      :base_type      :type/Integer
+      :effective_type :type/Integer})
+   (range 1 10)))
+
 (defn rando-board-query-results [difficulty]
-  {:rows    (for [row (partition 9 (rando-board difficulty))]
-              ;; replace the zeroes in the board with nils
-              (for [cell row]
-                (when-not (zero? cell)
-                  cell)))
-   :columns (for [i (range 1 10)]
-              (format "col_%d" i))})
+  (for [row (partition 9 (rando-board difficulty))]
+    ;; replace the zeroes in the board with nils
+    (for [cell row]
+      (when-not (zero? cell)
+        cell))))
