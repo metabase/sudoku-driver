@@ -1,0 +1,15 @@
+{:paths
+ ["src" "resources"]
+
+ :deps
+ {org.clojure/core.logic {:mvn/version "1.0.0"}}
+
+ ;; build the driver with clojure -X:build
+ :aliases
+ {:build
+  {:extra-deps {metabase/metabase-core {:local/root "../metabase"}
+                metabase/build-drivers {:local/root "../metabase/bin/build-drivers"}}
+   :exec-fn    build-drivers.build-driver/build-driver!
+   :exec-args  {:driver      :sudoku
+                :project-dir "."
+                :target-dir  "./target"}}}}
