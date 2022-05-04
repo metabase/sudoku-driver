@@ -43,10 +43,10 @@
   [_driver {{source-table-id :source-table} :query, :as mbql-query}]
   (println "MBQL query:")
   (pprint/pprint mbql-query)
-  (:name (qp.store/table source-table-id)))
+  {:query (:name (qp.store/table source-table-id))})
 
 (defmethod driver/execute-reducible-query :sudoku
-  [_driver {difficulty :native, :as query} _context respond]
+  [_driver {{difficulty :query} :native, :as query} _context respond]
   (println "Native query:" (pr-str (select-keys query [:native])))
   (let [metadata (sudoku.qp/column-metadata)
         rows     (sudoku.qp/random-board-rows (keyword difficulty))]

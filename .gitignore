@@ -4,3 +4,8 @@
 /.nrepl-port
 .cpcache
 .class
+
+# lsp: ignore all but the config file
+.lsp/*
+!.lsp/config.edn
+.clj-kondo/.cache
