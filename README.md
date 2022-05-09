@@ -15,7 +15,7 @@ newer version.
 ## Build it
 
 ```sh
-clj -X:build :project-dir "\"$(pwd)\""
+clojure -X:build :project-dir "\"$(pwd)\""
 ```
 
 will create `target/sudoku.metabase-driver.jar`. Copy this file to `/path/to/metabase/plugins/` and restart your
