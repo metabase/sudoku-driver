@@ -4,12 +4,15 @@
  :deps
  {org.clojure/core.logic {:mvn/version "1.0.0"}}
 
- ;; build the driver with clojure -X:build
+ ;; the stuff below is only for hacking on the driver locally and is not needed if you follow the instructions in the
+ ;; README and create a `:local/root` dep for the driver and launch the REPL from the Metabase project rather than
+ ;; from here
+
+ ;;; needed for Metabase as a local dep for local development
+ :mvn/repos
+ {"opensaml" {:url "https://build.shibboleth.net/nexus/content/repositories/releases/"}}
+
  :aliases
- {:build
-  {:extra-deps {metabase/metabase-core {:local/root "../metabase"}
-                metabase/build-drivers {:local/root "../metabase/bin/build-drivers"}}
-   :exec-fn    build-drivers.build-driver/build-driver!
-   :exec-args  {:driver      :sudoku
-                :project-dir "."
-                :target-dir  "./target"}}}}
+ {:dev
+  {:extra-deps
+   {io.github.metabase/metabase {:git/tag "v0.46.0-RC2", :git/sha "32977a42"}}}}}
